@@ -7,11 +7,15 @@ var React = require('react');
 // ## 主程式
 var Header = React.createClass({
   
+  getDefaultProps : function () { 
+      console.log(" <<----- Header.jsx ----->>")
+      console.log("(00). Header getDefaultProps")
+      return {};
+  },
   
   // ##: getInitialState 
   // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
   getInitialState: function () {
-      console.log(" <<----- Header.jsx ----->>")
       console.log("(0). Header getInitialState")
       return {count: 0};
   },
@@ -28,7 +32,6 @@ var Header = React.createClass({
           <div className="container">
               <div className="navbar-header">
                     <a href="../" className="navbar-brand">T</a>
-                    <span className="testCount">{this.state.count}</span>
               </div>
               <div className="navbar-collapse collapse" id="navbar-main">
                   <ul className="nav navbar-nav navbar-right">
@@ -55,6 +58,7 @@ var Header = React.createClass({
                         <div className="form-group">
                              <input type="text" className="form-control" placeholder="搜尋" onChange={this.handleOnChange}/>
                         </div>
+                        <span className="testCount">{this.state.count}</span>
                    </form>
               </div>
           </div>

@@ -19683,13 +19683,19 @@
 	var MainApp = React.createClass({
 	    displayName: 'MainApp',
 
+	    // 當父元件沒有提供props的屬性時，可以採用getDefaultProps，預設props屬性的方式，讓元件使用預設的設定值，確保有props帶入。
+	    getDefaultProps: function getDefaultProps() {
+	        console.log(" <<----- Main.jsx ----->>");
+	        console.log("(00). Main getDefaultProps");
+	        return {};
+	    },
+
 	    // ##: getInitialState
 	    // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
 	    getInitialState: function getInitialState() {
 	        //var o = this.getTruth();
 	        //common.debugConsole({ title:"[MainApp] getInitialState", data: o})
-	        console.log(" <<----- Main.jsx ----->>");
-	        console.log("(0). getInitialState");
+	        console.log("(0). Main getInitialState");
 	        return {};
 	    },
 
@@ -19715,13 +19721,13 @@
 
 	    // 主程式進入點
 	    componentWillMount: function componentWillMount() {
-	        console.log("(1). componentWillMount");
+	        console.log("(1). Main componentWillMount");
 	    },
 
 	    // -------------------------
 	    // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
 	    componentDidMount: function componentDidMount() {
-	        console.log("(2). componentDidMount");
+	        console.log("(2). Main componentDidMount");
 	    },
 
 	    //========================================================================
@@ -19789,16 +19795,20 @@
 	var Header = React.createClass({
 	    displayName: "Header",
 
+	    getDefaultProps: function getDefaultProps() {
+	        console.log(" <<----- Header.jsx ----->>");
+	        console.log("(00). Header getDefaultProps");
+	        return {};
+	    },
+
 	    // ##: getInitialState
 	    // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
 	    getInitialState: function getInitialState() {
-	        console.log(" <<----- Header.jsx ----->>");
-	        console.log("(0). getInitialState");
+	        console.log("(0). Header getInitialState");
 	        return { count: 0 };
 	    },
 
 	    handleOnChange: function handleOnChange(e) {
-	        console.log("# handleOnChange");
 	        this.setState({ count: e.target.value.length });
 	    },
 
@@ -19817,11 +19827,6 @@
 	                        "a",
 	                        { href: "../", className: "navbar-brand" },
 	                        "T"
-	                    ),
-	                    React.createElement(
-	                        "span",
-	                        { className: "testCount" },
-	                        this.state.count
 	                    )
 	                ),
 	                React.createElement(
@@ -19904,6 +19909,11 @@
 	                            "div",
 	                            { className: "form-group" },
 	                            React.createElement("input", { type: "text", className: "form-control", placeholder: "搜尋", onChange: this.handleOnChange })
+	                        ),
+	                        React.createElement(
+	                            "span",
+	                            { className: "testCount" },
+	                            this.state.count
 	                        )
 	                    )
 	                )

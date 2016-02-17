@@ -5,15 +5,20 @@ var Header = React.createFactory(require('./Header.jsx'));
 
 // ## 主程式
 var MainApp = React.createClass({
-
+    
+    // 當父元件沒有提供props的屬性時，可以採用getDefaultProps，預設props屬性的方式，讓元件使用預設的設定值，確保有props帶入。
+    getDefaultProps : function () { 
+        console.log(" <<----- Main.jsx ----->>")
+        console.log("(00). Main getDefaultProps")
+        return {};
+    },
     
     // ##: getInitialState 
     // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
     getInitialState: function () {
         //var o = this.getTruth();
         //common.debugConsole({ title:"[MainApp] getInitialState", data: o}) 
-        console.log(" <<----- Main.jsx ----->>")
-        console.log("(0). getInitialState")
+        console.log("(0). Main getInitialState")
         return {};
     },
     
