@@ -1,5 +1,6 @@
 // ## import 
 var React = require('react');
+var Header = React.createFactory(require('./Header.jsx'));
 
 
 // ## 主程式
@@ -11,6 +12,8 @@ var MainApp = React.createClass({
     getInitialState: function () {
         //var o = this.getTruth();
         //common.debugConsole({ title:"[MainApp] getInitialState", data: o}) 
+        console.log(" <<----- Main.jsx ----->>")
+        console.log("(0). getInitialState")
         return {};
     },
     
@@ -40,7 +43,7 @@ var MainApp = React.createClass({
     
      // 主程式進入點
     componentWillMount: function () {
-        console.log("(1). componentWillMount")
+        console.log("(1). Main componentWillMount")
     },
     
    
@@ -48,7 +51,7 @@ var MainApp = React.createClass({
     // -------------------------
     // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
     componentDidMount: function () {
-        console.log("(2). componentDidMount")
+        console.log("(2). Main componentDidMount")
     },  
 
 
@@ -99,7 +102,7 @@ var MainApp = React.createClass({
     render: function () {
         return (
             <div className="main-container">
-             
+                <Header />
             </div> 
          )
 	}

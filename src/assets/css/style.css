@@ -1,0 +1,89 @@
+@font-face {
+  font-family: 'cwTeXHei';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/cwtexhei/v3/cwTeXHei-zhonly.ttf) format('truetype');
+}
+
+body{
+	margin:0;
+	padding:0;
+    font-family: "cwTeXHei","微軟正黑體","Microsoft JhengHei",'Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-weight: normal;
+}
+
+.navbar-toggle {
+    display: block;
+    margin-right: 0px;
+}
+.navbar-header {
+        float: left;
+}
+@media (min-width: 768px){
+    .navbar-toggle {
+        display: block;
+    }
+}
+
+.collapse {
+    display: block;
+}
+.navbar-nav>.dropdown>.dropdown-toggle{
+    padding: 0px 6px;
+} 
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #eeeeee;
+    color: #212121;
+    height: 63px;
+}
+
+.nav>li>a {
+    padding: 0px;
+}
+
+.navbar-nav {
+    margin: 0px;
+}
+
+.navbar {
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+    float: left;
+    padding: 14px 15px 0px;
+    line-height: 20px;
+    height: 44px;
+    margin-top: 8px;
+    background-color: #3D9BE6;
+    color: #fff !important;
+    font-size: 28px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px){
+    .navbar-form{
+        margin-top: 0px;
+        margin-bottom: 0px; 
+    }
+}
+.navbar{
+    min-height: 65px;
+}
+.navbar-form .form-group input{
+    font-size: 13px;
+}
+
+.navbar-right {
+    float: right !important;
+}
+.testCount{
+    padding: 10px;
+    font-size: 14px;
+}

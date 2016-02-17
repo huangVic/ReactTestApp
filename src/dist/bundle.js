@@ -19674,19 +19674,22 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// ## import
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
+	var Header = React.createFactory(__webpack_require__(160));
 
 	// ## 主程式
 	var MainApp = React.createClass({
-	    displayName: "MainApp",
+	    displayName: 'MainApp',
 
 	    // ##: getInitialState
 	    // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
 	    getInitialState: function getInitialState() {
 	        //var o = this.getTruth();
 	        //common.debugConsole({ title:"[MainApp] getInitialState", data: o})
+	        console.log(" <<----- Main.jsx ----->>");
+	        console.log("(0). getInitialState");
 	        return {};
 	    },
 
@@ -19764,36 +19767,152 @@
 	    // ## render
 	    render: function render() {
 	        return React.createElement(
+	            'div',
+	            { className: 'main-container' },
+	            React.createElement(Header, null)
+	        );
+	    }
+	});
+
+	module.exports = MainApp;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// ## import
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	// ## 主程式
+	var Header = React.createClass({
+	    displayName: "Header",
+
+	    // ##: getInitialState
+	    // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
+	    getInitialState: function getInitialState() {
+	        console.log(" <<----- Header.jsx ----->>");
+	        console.log("(0). getInitialState");
+	        return { count: 0 };
+	    },
+
+	    handleOnChange: function handleOnChange(e) {
+	        console.log("# handleOnChange");
+	        this.setState({ count: e.target.value.length });
+	    },
+
+	    // ## render
+	    render: function render() {
+	        return React.createElement(
 	            "div",
-	            { className: "main-container" },
+	            { className: "navbar navbar-default navbar-fixed-top" },
 	            React.createElement(
 	                "div",
-	                { className: "row" },
+	                { className: "container" },
 	                React.createElement(
 	                    "div",
-	                    { className: "col-sm-4" },
-	                    "123"
+	                    { className: "navbar-header" },
+	                    React.createElement(
+	                        "a",
+	                        { href: "../", className: "navbar-brand" },
+	                        "T"
+	                    ),
+	                    React.createElement(
+	                        "span",
+	                        { className: "testCount" },
+	                        this.state.count
+	                    )
 	                ),
 	                React.createElement(
 	                    "div",
-	                    { className: "col-sm-8" },
-	                    "456"
-	                )
-	            ),
-	            React.createElement(
-	                "div",
-	                { className: "row" },
-	                React.createElement(
-	                    "div",
-	                    { className: "col-sm-12" },
-	                    "789"
+	                    { className: "navbar-collapse collapse", id: "navbar-main" },
+	                    React.createElement(
+	                        "ul",
+	                        { className: "nav navbar-nav navbar-right" },
+	                        React.createElement(
+	                            "li",
+	                            { className: "dropdown" },
+	                            React.createElement(
+	                                "a",
+	                                { href: "#", className: "dropdown-toggle", "data-toggle": "dropdown", role: "button", "aria-expanded": "false" },
+	                                React.createElement(
+	                                    "button",
+	                                    { className: "navbar-toggle", type: "button" },
+	                                    React.createElement("span", { className: "icon-bar" }),
+	                                    React.createElement("span", { className: "icon-bar" }),
+	                                    React.createElement("span", { className: "icon-bar" })
+	                                )
+	                            ),
+	                            React.createElement(
+	                                "ul",
+	                                { className: "dropdown-menu", role: "menu" },
+	                                React.createElement(
+	                                    "li",
+	                                    null,
+	                                    React.createElement(
+	                                        "a",
+	                                        { href: "#" },
+	                                        "Action"
+	                                    )
+	                                ),
+	                                React.createElement(
+	                                    "li",
+	                                    null,
+	                                    React.createElement(
+	                                        "a",
+	                                        { href: "#" },
+	                                        "Another action"
+	                                    )
+	                                ),
+	                                React.createElement(
+	                                    "li",
+	                                    null,
+	                                    React.createElement(
+	                                        "a",
+	                                        { href: "#" },
+	                                        "Something else here"
+	                                    )
+	                                ),
+	                                React.createElement("li", { className: "divider" }),
+	                                React.createElement(
+	                                    "li",
+	                                    null,
+	                                    React.createElement(
+	                                        "a",
+	                                        { href: "#" },
+	                                        "Separated link"
+	                                    )
+	                                ),
+	                                React.createElement("li", { className: "divider" }),
+	                                React.createElement(
+	                                    "li",
+	                                    null,
+	                                    React.createElement(
+	                                        "a",
+	                                        { href: "#" },
+	                                        "One more separated link"
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    React.createElement(
+	                        "form",
+	                        { className: "navbar-form navbar-right", role: "search" },
+	                        React.createElement(
+	                            "div",
+	                            { className: "form-group" },
+	                            React.createElement("input", { type: "text", className: "form-control", placeholder: "搜尋", onChange: this.handleOnChange })
+	                        )
+	                    )
 	                )
 	            )
 	        );
 	    }
 	});
 
-	module.exports = MainApp;
+	module.exports = Header;
 
 /***/ }
 /******/ ]);
