@@ -14,8 +14,13 @@ body{
 	padding:0;
     font-family: "cwTeXHei","微軟正黑體","Microsoft JhengHei",'Helvetica Neue',Helvetica,Arial,sans-serif;
 	font-weight: normal;
-    background-color: #E3E4F1;
+    background-color: #EFF0F3;
 }
+
+.main-container{
+   padding-top: 90px; 
+}
+
 navbar{
    background-color: #FBFBFB; 
 }
@@ -217,4 +222,8 @@ navbar{
 }
 .navbar-default .navbar-form{
     padding-right: 5px;
-}   
+}
+
+.row{
+    margin: 0px;
+}

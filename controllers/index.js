@@ -6,7 +6,8 @@ router.use('/Auth', require('./auth'));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { page_title: 'React Test App' });
+    var cssList = [{ src: "/assets/css/statusFilter.css" }];
+    res.render('index', { page_title: 'React Test App', cssList: cssList });
 });
 
 module.exports = router;
