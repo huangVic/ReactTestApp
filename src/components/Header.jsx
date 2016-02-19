@@ -78,6 +78,8 @@ var Header = React.createClass({
         loginClass.icon_name = "input";
     }
     
+    var header_user_name = this.props.logged_in?this.props.user_name:"匿名使用者";
+    
     return (
         <div className="navbar navbar-default navbar-fixed-top">
           <div className="container">
@@ -95,14 +97,20 @@ var Header = React.createClass({
                                 </button>
                             </a>
                             <ul className="dropdown-menu" role="menu">
-                                 <li className="menuUserName">
+                                <li className="menuUserName">
                                     <i className="material-icons">person</i>
-                                    <div className="header_user_name">{this.props.logged_in?this.props.user_name:"匿名使用者"}</div>
+                                    <div className="header_user_name">{header_user_name}</div>
+                                    <div className="clear_both"></div>
+                                </li>
+                                <li>
+                                    <i className="material-icons">notifications_active</i>
+                                    <div>最新通知</div>
+                                    <div className="notices">12</div>
                                     <div className="clear_both"></div>
                                 </li>
                                 <li>
                                     <i className="material-icons">settings</i>
-                                    <div>設定</div>
+                                    <div>基本設定</div>
                                     <div className="clear_both"></div>
                                 </li>
                                 <li className="divider"></li>
@@ -113,9 +121,11 @@ var Header = React.createClass({
                                 </li>
                             </ul>
                         </li>
+                        <li><div className="header_title_user_name">{header_user_name.substring(0,1)}</div></li>
                     </ul>
                     <form className="navbar-form navbar-right" role="search">
                         <div className="form-group">
+                             <i className="material-icons">search</i>
                              <input type="text" className="form-control" placeholder="搜尋" onChange={this.handleOnChange}/>
                         </div>
                    </form>

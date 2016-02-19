@@ -1,6 +1,8 @@
 // ## import 
 var React = require('react');
+var $ = require('jquery');
 var Header = React.createFactory(require('./Header.jsx'));
+var StatusFilter = React.createFactory(require('./StatusFilter.jsx'));
 
 
 // ## 主程式
@@ -19,7 +21,7 @@ var MainApp = React.createClass({
         //var o = this.getTruth();
         //common.debugConsole({ title:"[MainApp] getInitialState", data: o}) 
         console.log("(0). Main getInitialState")
-        return {};
+        return { logged_in: false, user_name: "" };
     },
     
      
@@ -50,13 +52,21 @@ var MainApp = React.createClass({
     componentWillMount: function () {
         console.log("(1). Main componentWillMount")
     },
-    
-   
 
     // -------------------------
     // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
     componentDidMount: function () {
         console.log("(2). Main componentDidMount")
+        $.get("/Auth/getUserData", function(result){
+            if (result.success == "ok") {
+                if (this.isMounted()) {
+                    this.setState({
+                        user_name: result.user.user_name,
+                        logged_in: result.user.logged_in
+                    })
+                }
+            }
+        }.bind(this));
     },  
 
 
@@ -107,7 +117,8 @@ var MainApp = React.createClass({
     render: function () {
         return (
             <div className="main-container">
-                <Header />
+                <Header {...this.state}/>
+                <StatusFilter {...this.state}/>
             </div> 
          )
 	}
