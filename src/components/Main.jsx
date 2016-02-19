@@ -10,8 +10,8 @@ var MainApp = React.createClass({
     
     // 當父元件沒有提供props的屬性時，可以採用getDefaultProps，預設props屬性的方式，讓元件使用預設的設定值，確保有props帶入。
     getDefaultProps : function () { 
-        console.log(" <<----- Main.jsx ----->>")
-        console.log("(00). Main getDefaultProps")
+        //console.log(" <<----- Main.jsx ----->>")
+        //console.log("(00). Main getDefaultProps")
         return {};
     },
     
@@ -20,7 +20,7 @@ var MainApp = React.createClass({
     getInitialState: function () {
         //var o = this.getTruth();
         //common.debugConsole({ title:"[MainApp] getInitialState", data: o}) 
-        console.log("(0). Main getInitialState")
+        //console.log("(0). Main getInitialState")
         return { logged_in: false, user_name: "" };
     },
     
@@ -50,13 +50,13 @@ var MainApp = React.createClass({
     
      // 主程式進入點
     componentWillMount: function () {
-        console.log("(1). Main componentWillMount")
+        //console.log("(1). Main componentWillMount")
     },
 
     // -------------------------
     // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
     componentDidMount: function () {
-        console.log("(2). Main componentDidMount")
+        //console.log("(2). Main componentDidMount")
         $.get("/Auth/getUserData", function(result){
             if (result.success == "ok") {
                 if (this.isMounted()) {
@@ -75,7 +75,7 @@ var MainApp = React.createClass({
     // ## unmount
     // 元件將從畫面上移除時，要做善後工作
     componentWillUnmount: function() {
-        console.log("(x). componentWillUnmount")
+        //console.log("(x). componentWillUnmount")
     },
 
 
@@ -85,23 +85,23 @@ var MainApp = React.createClass({
     
     // ## 在 render() 前執行，有機會可先處理 props 後用 setState() 存起來
     componentWillReceiveProps: function (nextProps) {
-        console.log("(3). componentWillReceiveProps")
+        //console.log("(3). componentWillReceiveProps")
     },
 
     // -------------------------
     shouldComponentUpdate: function (nextProps, nextState) {
-        console.log("(4). shouldComponentUpdate")
+        //console.log("(4). shouldComponentUpdate")
         return true;
     },
 
     // -------------------------
     componentWillUpdate: function (nextProps, nextState) {
-        console.log("(5). componentWillUpdate")
+        //console.log("(5). componentWillUpdate")
     },
 
     // -------------------------
     componentDidUpdate: function (prevProps, prevState) {
-        console.log("(6). componentDidUpdate")
+        //console.log("(6). componentDidUpdate")
     },
 
     // handleChange: function (name) {

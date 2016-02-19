@@ -33,15 +33,15 @@ var LogOutButton = React.createClass({
 var Header = React.createClass({
   
   getDefaultProps : function () { 
-      console.log(" <<----- Header.jsx ----->>")
-      console.log("(00). Header getDefaultProps")
+      //console.log(" <<----- Header.jsx ----->>")
+      //console.log("(00). Header getDefaultProps")
       return {};
   },
   
   // ##: getInitialState 
   // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
   getInitialState: function () {
-      console.log("(0). Header getInitialState")
+      //console.log("(0). Header getInitialState")
       return {count: 0};
   },
   
@@ -62,7 +62,7 @@ var Header = React.createClass({
   
   // ## render
   render: function() {
-    console.log(" Header: " + this.props.logged_in);
+    //console.log(" Header: " + this.props.logged_in);
     // var loginButton;
     // if (this.props.logged_in) {
     //     loginButton = <LogOutButton />;

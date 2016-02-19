@@ -19689,8 +19689,8 @@
 
 	    // 當父元件沒有提供props的屬性時，可以採用getDefaultProps，預設props屬性的方式，讓元件使用預設的設定值，確保有props帶入。
 	    getDefaultProps: function getDefaultProps() {
-	        console.log(" <<----- Main.jsx ----->>");
-	        console.log("(00). Main getDefaultProps");
+	        //console.log(" <<----- Main.jsx ----->>")
+	        //console.log("(00). Main getDefaultProps")
 	        return {};
 	    },
 
@@ -19699,7 +19699,7 @@
 	    getInitialState: function getInitialState() {
 	        //var o = this.getTruth();
 	        //common.debugConsole({ title:"[MainApp] getInitialState", data: o})
-	        console.log("(0). Main getInitialState");
+	        //console.log("(0). Main getInitialState")
 	        return { logged_in: false, user_name: "" };
 	    },
 
@@ -19725,13 +19725,13 @@
 
 	    // 主程式進入點
 	    componentWillMount: function componentWillMount() {
-	        console.log("(1). Main componentWillMount");
+	        //console.log("(1). Main componentWillMount")
 	    },
 
 	    // -------------------------
 	    // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
 	    componentDidMount: function componentDidMount() {
-	        console.log("(2). Main componentDidMount");
+	        //console.log("(2). Main componentDidMount")
 	        $.get("/Auth/getUserData", (function (result) {
 	            if (result.success == "ok") {
 	                if (this.isMounted()) {
@@ -19748,7 +19748,7 @@
 	    // ## unmount
 	    // 元件將從畫面上移除時，要做善後工作
 	    componentWillUnmount: function componentWillUnmount() {
-	        console.log("(x). componentWillUnmount");
+	        //console.log("(x). componentWillUnmount")
 	    },
 
 	    //========================================================================
@@ -19756,23 +19756,23 @@
 
 	    // ## 在 render() 前執行，有機會可先處理 props 後用 setState() 存起來
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        console.log("(3). componentWillReceiveProps");
+	        //console.log("(3). componentWillReceiveProps")
 	    },
 
 	    // -------------------------
 	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-	        console.log("(4). shouldComponentUpdate");
+	        //console.log("(4). shouldComponentUpdate")
 	        return true;
 	    },
 
 	    // -------------------------
 	    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
-	        console.log("(5). componentWillUpdate");
+	        //console.log("(5). componentWillUpdate")
 	    },
 
 	    // -------------------------
 	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-	        console.log("(6). componentDidUpdate");
+	        //console.log("(6). componentDidUpdate")
 	    },
 
 	    // handleChange: function (name) {
@@ -29704,15 +29704,15 @@
 	    displayName: "Header",
 
 	    getDefaultProps: function getDefaultProps() {
-	        console.log(" <<----- Header.jsx ----->>");
-	        console.log("(00). Header getDefaultProps");
+	        //console.log(" <<----- Header.jsx ----->>")
+	        //console.log("(00). Header getDefaultProps")
 	        return {};
 	    },
 
 	    // ##: getInitialState
 	    // 這是 component API, 在 mount 前會跑一次，取值做為 this.state 的預設值
 	    getInitialState: function getInitialState() {
-	        console.log("(0). Header getInitialState");
+	        //console.log("(0). Header getInitialState")
 	        return { count: 0 };
 	    },
 
@@ -29733,7 +29733,7 @@
 
 	    // ## render
 	    render: function render() {
-	        console.log(" Header: " + this.props.logged_in);
+	        //console.log(" Header: " + this.props.logged_in);
 	        // var loginButton;
 	        // if (this.props.logged_in) {
 	        //     loginButton = <LogOutButton />;
@@ -29919,7 +29919,7 @@
 	    componentDidMount: function componentDidMount() {},
 
 	    handleOnHover: function handleOnHover(e) {
-	        console.log(e.target);
+	        //console.log(e.target)
 	        //var toolTip = (<Tooltip>Check this info.</Tooltip>);
 	    },
 
@@ -29976,7 +29976,14 @@
 	    },
 
 	    getInitialState: function getInitialState() {
-	        var list = [{
+	        return { list: [] };
+	    },
+
+	    componentWillMount: function componentWillMount() {},
+
+	    // 若從資料庫取回資料發生錯誤, 由此資料替代為預設值
+	    getDefaultStatusList: function getDefaultStatusList() {
+	        return [{
 	            index: 0,
 	            status: 10,
 	            name: "暫存單據",
@@ -30002,13 +30009,25 @@
 	            name: "結案單據",
 	            approver: "Vic.Huang"
 	        }];
-	        return { list: list };
 	    },
 
-	    componentWillMount: function componentWillMount() {},
-
 	    componentDidMount: function componentDidMount() {
-	        //console.log($('[data-toggle="tooltip"]'))
+	        $.get("/Status/defaultList", (function (result) {
+	            if (result.success == "ok" && result.status == 100) {
+	                if (this.isMounted()) {
+	                    var itemList = [];
+	                    for (var i = 0; i < result.list.length; i++) {
+	                        itemList.push({
+	                            index: i,
+	                            status: result.list[i].status,
+	                            name: result.list[i].status_name,
+	                            approver: ""
+	                        });
+	                    }
+	                    this.setState({ list: itemList });
+	                }
+	            }
+	        }).bind(this));
 	    },
 
 	    // ## render
@@ -30016,8 +30035,6 @@
 
 	        var rows = [];
 	        for (var i = 0; i < this.state.list.length; i++) {
-	            console.log("i: " + i);
-	            console.log(this.state.list[i]);
 	            rows.push(React.createElement(StatusItem, { key: "statusItem-" + this.state.list[i].index, data: this.state.list[i], length: this.state.list.length }));
 	        }
 

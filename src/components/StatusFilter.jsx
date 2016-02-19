@@ -26,7 +26,7 @@ var StatusItem = React.createClass({
     },  
     
     handleOnHover: function(e) {
-        console.log(e.target)
+        //console.log(e.target)
         //var toolTip = (<Tooltip>Check this info.</Tooltip>);
     },
     
@@ -67,12 +67,23 @@ var StatusItem = React.createClass({
 // ## 主程式
 var StatusFilter = React.createClass({
     
+        
     getDefaultProps : function () { 
         return {};
     },
         
     getInitialState: function () {
-        var list = [
+        return { list: [] };
+    },
+    
+    componentWillMount: function () {
+        
+    },
+    
+    
+    // 若從資料庫取回資料發生錯誤, 由此資料替代為預設值
+    getDefaultStatusList : function () {
+      return [
             {
                 index: 0,
                 status: 10,
@@ -103,16 +114,26 @@ var StatusFilter = React.createClass({
                 name: "結案單據",
                 approver: "Vic.Huang"
             }
-        ]
-        return { list: list };
-    },
-    
-    componentWillMount: function () {
-        
+        ];
     },
     
     componentDidMount: function () {
-        //console.log($('[data-toggle="tooltip"]'))
+         $.get("/Status/defaultList", function(result){
+             if (result.success == "ok" && result.status == 100) {
+                 if (this.isMounted()) {
+                    var itemList = [];
+                    for ( var i = 0; i < result.list.length; i++) {
+                        itemList.push({
+                            index: i ,
+                            status: result.list[i].status,
+                            name: result.list[i].status_name,
+                            approver: ""
+                        }) 
+                    }
+                    this.setState({list:itemList});
+                 } 
+             }
+         }.bind(this))
     },  
     
     
@@ -121,8 +142,6 @@ var StatusFilter = React.createClass({
         
         var rows = [];
         for (var i = 0 ; i < this.state.list.length; i++) {
-            console.log("i: " + i);
-            console.log(this.state.list[i]);
             rows.push(<StatusItem key={"statusItem-" + this.state.list[i].index } data={this.state.list[i]} length={this.state.list.length} />);
         }
         
