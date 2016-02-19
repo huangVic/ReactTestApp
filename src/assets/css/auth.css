@@ -1,0 +1,26 @@
+body{
+    background-color: #eee;
+}
+.login-panel{
+    max-width: 440px;
+    margin: 80px auto 20px;
+    box-shadow: 1px 1px 6px 4px rgba(0,0,0,0.3);
+}
+.login-panel .panel-body {
+    padding: 30px 30px 20px;
+}
+
+.login-panel .panel-body legend{
+    border-bottom: 1px dashed #e5e5e5;  
+}
+.login-panel-backHome{
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: right;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.login-panel-backHome-text{
+    float: right;
+    padding: 0px 6px 5px 6px; 
+}

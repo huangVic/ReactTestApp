@@ -19,5 +19,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 
 
-var MainApp = React.createFactory(require('../components/Main.jsx'));
-ReactDom.render( MainApp(), document.getElementById('root') );
+if (window.location.pathname != "/Auth") {
+    var MainApp = React.createFactory(require('../components/Main.jsx'));
+    ReactDom.render(MainApp(), document.getElementById('root'));
+}

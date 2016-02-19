@@ -1,10 +1,11 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var SessionFilter = require('./common/SessionFilter');  //登入驗證
 
 /**
  * Express 模組
@@ -24,12 +25,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({ resave: true, saveUninitialized: true, secret: 'ab1ced3fghi4jklmnopqrstuwvxyz', cookie: { maxAge: 60000*30 } }));
 app.use(express.static(path.join(__dirname, 'src')));
 
 
 /**
  * Express 路由器
  */
+//app.use(SessionFilter);
 app.use(require('./controllers'));
 
 

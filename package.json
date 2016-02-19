@@ -1,29 +1,32 @@
 {
-  "name": "ReactTestAPP",
-  "version": "0.0.1",
-  "private": true,
-  "author": "Vic Huang <emcmis1@gmail.com>",
-  "scripts": {
-    "start": "node ./bin/www",
-    "bulid": "webpack"
-  },
-  "dependencies": {
-    "babel-loader": "^5.3.2",
-    "body-parser": "~1.13.1",
-    "cookie-parser": "~1.3.5",
-    "css-loader": "^0.21.0",
-    "debug": "~2.2.0",
-    "express": "~4.13.0",
-    "hbs": "~3.1.0",
-    "morgan": "~1.6.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "serve-favicon": "~2.3.0",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.12.13"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/huangVic/ReactTestApp"
-  }
+    "name": "ReactTestAPP",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Vic Huang <emcmis1@gmail.com>",
+    "scripts": {
+        "start": "node ./bin/www",
+        "bulid": "webpack"
+    },
+    "dependencies": {
+        "avoscloud-sdk": "^0.6.9",
+        "babel-loader": "^5.3.2",
+        "body-parser": "~1.13.1",
+        "cookie-parser": "~1.3.5",
+        "css-loader": "^0.21.0",
+        "debug": "~2.2.0",
+        "express": "~4.13.0",
+        "express-session": "^1.13.0",
+        "hbs": "~3.1.0",
+        "morgan": "~1.6.1",
+        "jquery": "^2.2.0",
+        "react": "^0.14.0",
+        "react-dom": "^0.14.0",
+        "serve-favicon": "~2.3.0",
+        "style-loader": "^0.13.0",
+        "webpack": "^1.12.13"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/huangVic/ReactTestApp"
+    }
 }

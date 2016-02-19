@@ -2,6 +2,31 @@
 var React = require('react');
 
 
+var LogInButton = React.createClass({
+     // ## render
+     render: function() {
+         return (
+             <div>
+               <li className="divider"></li>
+               <li><i className="material-icons">input</i><div>登入</div><div className="clear_both"></div></li>
+             </div>  
+         );
+     }
+})
+
+var LogOutButton = React.createClass({
+     // ## render
+     render: function() {
+         return (
+            <div>
+                <li className="divider"></li>
+                <li><i className="material-icons">undo</i><div>登出</div><div className="clear_both"></div></li>
+            </div>
+         );
+     }
+})
+
+
 
 
 // ## 主程式
@@ -20,13 +45,39 @@ var Header = React.createClass({
       return {count: 0};
   },
   
-  handleOnChange: function(e){
+  handleOnChange: function(e) {
       this.setState({count: e.target.value.length});
   },
- 
+  
+  handleLoginOnClick: function(e) {
+      e.preventDefault();
+      if (this.props.logged_in) { 
+          if( confirm("確定要登出嗎?") ) {
+               window.location.href = "/Auth/logout";
+          }
+      } else {
+          window.location.href = "/Auth";
+      }
+  },
   
   // ## render
   render: function() {
+    console.log(" Header: " + this.props.logged_in);
+    // var loginButton;
+    // if (this.props.logged_in) {
+    //     loginButton = <LogOutButton />;
+    // } else {
+    //     loginButton = <LogInButton />;
+    // }
+    var loginClass = {};
+    if (this.props.logged_in) {
+        loginClass.display_name = "登出"
+        loginClass.icon_name = "undo";
+    } else {
+        loginClass.display_name = "登入"
+        loginClass.icon_name = "input";
+    }
+    
     return (
         <div className="navbar navbar-default navbar-fixed-top">
           <div className="container">
@@ -44,13 +95,22 @@ var Header = React.createClass({
                                 </button>
                             </a>
                             <ul className="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                 <li className="menuUserName">
+                                    <i className="material-icons">person</i>
+                                    <div className="header_user_name">{this.props.logged_in?this.props.user_name:"匿名使用者"}</div>
+                                    <div className="clear_both"></div>
+                                </li>
+                                <li>
+                                    <i className="material-icons">settings</i>
+                                    <div>設定</div>
+                                    <div className="clear_both"></div>
+                                </li>
                                 <li className="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li className="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li>
+                                   <i className="material-icons">{loginClass.icon_name}</i>
+                                   <div onClick={this.handleLoginOnClick}>{loginClass.display_name}</div>
+                                   <div className="clear_both"></div>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -58,7 +118,6 @@ var Header = React.createClass({
                         <div className="form-group">
                              <input type="text" className="form-control" placeholder="搜尋" onChange={this.handleOnChange}/>
                         </div>
-                        <span className="testCount">{this.state.count}</span>
                    </form>
               </div>
           </div>

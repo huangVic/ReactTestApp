@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>{{page_title}}</title>
     <link rel='stylesheet' href='/assets/css/bootstrap.paper.min.css' />
+    <link rel='stylesheet' href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel='stylesheet' href='/assets/css/style.css' />
+    {{#each cssList}}
+        <link rel='stylesheet' href='{{src}}' />
+    {{/each}}
   </head>
   <body>
     {{{body}}}
@@ -13,5 +17,8 @@
     <script src="/assets/js/jquery-1.11.3.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/dist/bundle.js"></script>
+     {{#each jsList}}
+        <script src="{{src}}"></script>
+    {{/each}}
   </body>
 </html>

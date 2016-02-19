@@ -65,8 +65,10 @@
 	var ReactDom = __webpack_require__(158);
 
 
-	var MainApp = React.createFactory(__webpack_require__(159));
-	ReactDom.render( MainApp(), document.getElementById('root') );
+	if (window.location.pathname != "/Auth") {
+	    var MainApp = React.createFactory(__webpack_require__(159));
+	    ReactDom.render(MainApp(), document.getElementById('root'));
+	}
 
 /***/ },
 /* 1 */
@@ -19791,6 +19793,62 @@
 
 	var React = __webpack_require__(1);
 
+	var LogInButton = React.createClass({
+	    displayName: "LogInButton",
+
+	    // ## render
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement("li", { className: "divider" }),
+	            React.createElement(
+	                "li",
+	                null,
+	                React.createElement(
+	                    "i",
+	                    { className: "material-icons" },
+	                    "input"
+	                ),
+	                React.createElement(
+	                    "div",
+	                    null,
+	                    "登入"
+	                ),
+	                React.createElement("div", { className: "clear_both" })
+	            )
+	        );
+	    }
+	});
+
+	var LogOutButton = React.createClass({
+	    displayName: "LogOutButton",
+
+	    // ## render
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement("li", { className: "divider" }),
+	            React.createElement(
+	                "li",
+	                null,
+	                React.createElement(
+	                    "i",
+	                    { className: "material-icons" },
+	                    "undo"
+	                ),
+	                React.createElement(
+	                    "div",
+	                    null,
+	                    "登出"
+	                ),
+	                React.createElement("div", { className: "clear_both" })
+	            )
+	        );
+	    }
+	});
+
 	// ## 主程式
 	var Header = React.createClass({
 	    displayName: "Header",
@@ -19812,8 +19870,35 @@
 	        this.setState({ count: e.target.value.length });
 	    },
 
+	    handleLoginOnClick: function handleLoginOnClick(e) {
+	        e.preventDefault();
+	        if (this.props.logged_in) {
+	            if (confirm("確定要登出嗎?")) {
+	                window.location.href = "/Auth/logout";
+	            }
+	        } else {
+	            window.location.href = "/Auth";
+	        }
+	    },
+
 	    // ## render
 	    render: function render() {
+	        console.log(" Header: " + this.props.logged_in);
+	        // var loginButton;
+	        // if (this.props.logged_in) {
+	        //     loginButton = <LogOutButton />;
+	        // } else {
+	        //     loginButton = <LogInButton />;
+	        // }
+	        var loginClass = {};
+	        if (this.props.logged_in) {
+	            loginClass.display_name = "登出";
+	            loginClass.icon_name = "undo";
+	        } else {
+	            loginClass.display_name = "登入";
+	            loginClass.icon_name = "input";
+	        }
+
 	        return React.createElement(
 	            "div",
 	            { className: "navbar navbar-default navbar-fixed-top" },
@@ -19854,50 +19939,49 @@
 	                                { className: "dropdown-menu", role: "menu" },
 	                                React.createElement(
 	                                    "li",
-	                                    null,
+	                                    { className: "menuUserName" },
 	                                    React.createElement(
-	                                        "a",
-	                                        { href: "#" },
-	                                        "Action"
-	                                    )
+	                                        "i",
+	                                        { className: "material-icons" },
+	                                        "person"
+	                                    ),
+	                                    React.createElement(
+	                                        "div",
+	                                        { className: "header_user_name" },
+	                                        this.props.logged_in ? this.props.user_name : "匿名使用者"
+	                                    ),
+	                                    React.createElement("div", { className: "clear_both" })
 	                                ),
 	                                React.createElement(
 	                                    "li",
 	                                    null,
 	                                    React.createElement(
-	                                        "a",
-	                                        { href: "#" },
-	                                        "Another action"
-	                                    )
-	                                ),
-	                                React.createElement(
-	                                    "li",
-	                                    null,
+	                                        "i",
+	                                        { className: "material-icons" },
+	                                        "settings"
+	                                    ),
 	                                    React.createElement(
-	                                        "a",
-	                                        { href: "#" },
-	                                        "Something else here"
-	                                    )
-	                                ),
-	                                React.createElement("li", { className: "divider" }),
-	                                React.createElement(
-	                                    "li",
-	                                    null,
-	                                    React.createElement(
-	                                        "a",
-	                                        { href: "#" },
-	                                        "Separated link"
-	                                    )
+	                                        "div",
+	                                        null,
+	                                        "設定"
+	                                    ),
+	                                    React.createElement("div", { className: "clear_both" })
 	                                ),
 	                                React.createElement("li", { className: "divider" }),
 	                                React.createElement(
 	                                    "li",
 	                                    null,
 	                                    React.createElement(
-	                                        "a",
-	                                        { href: "#" },
-	                                        "One more separated link"
-	                                    )
+	                                        "i",
+	                                        { className: "material-icons" },
+	                                        loginClass.icon_name
+	                                    ),
+	                                    React.createElement(
+	                                        "div",
+	                                        { onClick: this.handleLoginOnClick },
+	                                        loginClass.display_name
+	                                    ),
+	                                    React.createElement("div", { className: "clear_both" })
 	                                )
 	                            )
 	                        )
@@ -19909,11 +19993,6 @@
 	                            "div",
 	                            { className: "form-group" },
 	                            React.createElement("input", { type: "text", className: "form-control", placeholder: "搜尋", onChange: this.handleOnChange })
-	                        ),
-	                        React.createElement(
-	                            "span",
-	                            { className: "testCount" },
-	                            this.state.count
 	                        )
 	                    )
 	                )
