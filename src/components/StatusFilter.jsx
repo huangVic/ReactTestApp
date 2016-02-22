@@ -132,6 +132,8 @@ var StatusFilter = React.createClass({
                     }
                     this.setState({list:itemList});
                  } 
+             } else {
+                 this.setState({list: this.getDefaultStatusList()});
              }
          }.bind(this))
     },  
